@@ -1,0 +1,10 @@
+RewriteEngine On
+DirectoryIndex api.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+# RewriteRule ^([^\.]+)$ $1.html [NC,L]
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ api.php [QSA]
+ErrorDocument 404 /error-404.html

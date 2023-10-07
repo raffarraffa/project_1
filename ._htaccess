@@ -1,0 +1,32 @@
+
+# HTID:21069099: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:21069099:
+
+RewriteEngine On
+### redireccion subdominio ###
+#RewriteCond %{HTTP_HOST} ^apvl\.rafalopez\.ar$ [OR]
+#RewriteCond %{HTTP_HOST} ^www.apvl\.rafalopez\.ar$ [NC]
+#RewriteRule ^(.*)$ http\:\/\/rafalopez\.ar\/apvl\/$1 [R=301,L]
+
+#<If "%{REQUEST_URI} =~ m#^.*\.(css|jpg|jpeg|png|svg)$#">
+#    RewriteRule ^ - [R=301,L]
+#</If>
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteCond %{HTTP_HOST} ^nocountry\.rafalopez\.ar$
+##RewriteCond %{REQUEST_URI} !^/nocountry/
+##RewriteRule ^(.*)$ /nocountry/$1 [L]
+#RewriteCond %{HTTP_HOST} ^nocountry\.rafalopez\.ar$ [NC]
+#RewriteCond %{REQUEST_URI} !^/nocountry/ [NC]
+#RewriteRule ^(.*)$ /nocountry/$1 [L]
+#http://nocountry.rafalopez.ar/
+#RewriteCond %{HTTP_HOST} ^www\.nocountry\.rafalopez\.ar$ [OR]
+#RewriteCond %{HTTP_HOST} ^nocountry\.rafalopez\.ar$ [NC]
+#RewriteRule ^(.*)$ http\:\/\/rafalopez\.ar\/public\/nocountry\/$1 [L]
+#RewriteRule ^(.+)$ https://rafalopez.000webhostapp.com/nocountry/$1[L]
+
+RewriteCond %{HTTP_HOST} ^nocountry\.rafalopez\.ar$ [NC]
+RewriteCond %{REQUEST_URI} !^/nocountry/ [NC]
+RewriteRule ^(.*)$ /nocountry/$1 [L,R=301]

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 28-09-2023 a las 03:25:14
--- Versión del servidor: 8.0.31
--- Versión de PHP: 8.0.26
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-10-2023 a las 18:20:28
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `ciudades`
 --
 
-DROP TABLE IF EXISTS `ciudades`;
-CREATE TABLE IF NOT EXISTS `ciudades` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ciudad` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_pais` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `ciudades` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `ciudad` varchar(80) NOT NULL,
+  `id_pais` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -41,13 +39,20 @@ CREATE TABLE IF NOT EXISTS `ciudades` (
 -- Estructura de tabla para la tabla `colores`
 --
 
-DROP TABLE IF EXISTS `colores`;
-CREATE TABLE IF NOT EXISTS `colores` (
-  `id_color` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `color` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_color`),
-  UNIQUE KEY `color` (`color`)
+CREATE TABLE `colores` (
+  `id_color` int(10) UNSIGNED NOT NULL,
+  `color` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `colores`
+--
+
+INSERT INTO `colores` (`id_color`, `color`) VALUES
+(1, 'Blanco'),
+(4, 'Dorado'),
+(3, 'Marrón'),
+(2, 'Negro');
 
 -- --------------------------------------------------------
 
@@ -55,13 +60,21 @@ CREATE TABLE IF NOT EXISTS `colores` (
 -- Estructura de tabla para la tabla `especies`
 --
 
-DROP TABLE IF EXISTS `especies`;
-CREATE TABLE IF NOT EXISTS `especies` (
-  `id_especie` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `especie` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_especie`),
-  UNIQUE KEY `especie` (`especie`)
+CREATE TABLE `especies` (
+  `id_especie` int(10) UNSIGNED NOT NULL,
+  `especie` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `especies`
+--
+
+INSERT INTO `especies` (`id_especie`, `especie`) VALUES
+(3, 'Ave'),
+(1, 'Canino'),
+(2, 'Felino'),
+(5, 'Reptil'),
+(4, 'Roedor');
 
 -- --------------------------------------------------------
 
@@ -69,13 +82,10 @@ CREATE TABLE IF NOT EXISTS `especies` (
 -- Estructura de tabla para la tabla `fotos_mascotas`
 --
 
-DROP TABLE IF EXISTS `fotos_mascotas`;
-CREATE TABLE IF NOT EXISTS `fotos_mascotas` (
-  `id_foto` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_mascota` int UNSIGNED NOT NULL,
-  `archivo` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_foto`),
-  UNIQUE KEY `archivo` (`archivo`)
+CREATE TABLE `fotos_mascotas` (
+  `id_foto` int(10) UNSIGNED NOT NULL,
+  `id_mascota` int(10) UNSIGNED NOT NULL,
+  `archivo` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -84,22 +94,19 @@ CREATE TABLE IF NOT EXISTS `fotos_mascotas` (
 -- Estructura de tabla para la tabla `mascotas`
 --
 
-DROP TABLE IF EXISTS `mascotas`;
-CREATE TABLE IF NOT EXISTS `mascotas` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_user` int UNSIGNED NOT NULL,
-  `nombre` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_especie` int UNSIGNED NOT NULL,
-  `id_raza` int UNSIGNED NOT NULL,
-  `id_color` int UNSIGNED NOT NULL,
+CREATE TABLE `mascotas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_user` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(80) NOT NULL,
+  `id_especie` int(10) UNSIGNED NOT NULL,
+  `id_raza` int(10) UNSIGNED NOT NULL,
+  `id_color` int(10) UNSIGNED NOT NULL,
   `fecha_nacimiento` date NOT NULL,
-  `descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `observaciones` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `observaciones` varchar(250) DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
-  `genero` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `id_tamanio` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_user` (`id_user`)
+  `genero` char(1) NOT NULL,
+  `id_tamanio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -108,12 +115,22 @@ CREATE TABLE IF NOT EXISTS `mascotas` (
 -- Estructura de tabla para la tabla `paises`
 --
 
-DROP TABLE IF EXISTS `paises`;
-CREATE TABLE IF NOT EXISTS `paises` (
-  `id_pais` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `denominacion` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_pais`)
+CREATE TABLE `paises` (
+  `id_pais` int(10) UNSIGNED NOT NULL,
+  `denominacion` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `paises`
+--
+
+INSERT INTO `paises` (`id_pais`, `denominacion`) VALUES
+(1, 'Argentina'),
+(2, 'Brasil'),
+(3, 'Colombia'),
+(4, 'Cuba'),
+(5, 'Estados Unidos'),
+(6, 'Venezuela');
 
 -- --------------------------------------------------------
 
@@ -121,12 +138,9 @@ CREATE TABLE IF NOT EXISTS `paises` (
 -- Estructura de tabla para la tabla `razas`
 --
 
-DROP TABLE IF EXISTS `razas`;
-CREATE TABLE IF NOT EXISTS `razas` (
-  `id_raza` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `raza` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_raza`),
-  UNIQUE KEY `raza` (`raza`)
+CREATE TABLE `razas` (
+  `id_raza` int(10) UNSIGNED NOT NULL,
+  `raza` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -135,11 +149,9 @@ CREATE TABLE IF NOT EXISTS `razas` (
 -- Estructura de tabla para la tabla `rel_salud`
 --
 
-DROP TABLE IF EXISTS `rel_salud`;
-CREATE TABLE IF NOT EXISTS `rel_salud` (
-  `id_salud` int UNSIGNED NOT NULL,
-  `id_mascota` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_salud`,`id_mascota`)
+CREATE TABLE `rel_salud` (
+  `id_salud` int(10) UNSIGNED NOT NULL,
+  `id_mascota` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -148,11 +160,9 @@ CREATE TABLE IF NOT EXISTS `rel_salud` (
 -- Estructura de tabla para la tabla `rel_sociabilidad`
 --
 
-DROP TABLE IF EXISTS `rel_sociabilidad`;
-CREATE TABLE IF NOT EXISTS `rel_sociabilidad` (
-  `id_sociabilidad` int UNSIGNED NOT NULL,
-  `id_mascota` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id_sociabilidad`,`id_mascota`)
+CREATE TABLE `rel_sociabilidad` (
+  `id_sociabilidad` int(10) UNSIGNED NOT NULL,
+  `id_mascota` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -161,12 +171,9 @@ CREATE TABLE IF NOT EXISTS `rel_sociabilidad` (
 -- Estructura de tabla para la tabla `salud`
 --
 
-DROP TABLE IF EXISTS `salud`;
-CREATE TABLE IF NOT EXISTS `salud` (
-  `id_salud` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `salud` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_salud`),
-  UNIQUE KEY `salud` (`salud`)
+CREATE TABLE `salud` (
+  `id_salud` int(10) UNSIGNED NOT NULL,
+  `salud` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -175,13 +182,10 @@ CREATE TABLE IF NOT EXISTS `salud` (
 -- Estructura de tabla para la tabla `sociabilidad`
 --
 
-DROP TABLE IF EXISTS `sociabilidad`;
-CREATE TABLE IF NOT EXISTS `sociabilidad` (
-  `id_sociabilidad` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tipo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `sociabilidad` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_sociabilidad`),
-  UNIQUE KEY `sociabilidad` (`sociabilidad`)
+CREATE TABLE `sociabilidad` (
+  `id_sociabilidad` int(10) UNSIGNED NOT NULL,
+  `tipo` char(1) NOT NULL,
+  `sociabilidad` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -190,12 +194,9 @@ CREATE TABLE IF NOT EXISTS `sociabilidad` (
 -- Estructura de tabla para la tabla `tamanios`
 --
 
-DROP TABLE IF EXISTS `tamanios`;
-CREATE TABLE IF NOT EXISTS `tamanios` (
-  `id_tamanio` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tamanio` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_tamanio`),
-  UNIQUE KEY `tamanio` (`tamanio`)
+CREATE TABLE `tamanios` (
+  `id_tamanio` int(10) UNSIGNED NOT NULL,
+  `tamanio` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -204,23 +205,191 @@ CREATE TABLE IF NOT EXISTS `tamanios` (
 -- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nombres` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `apellido` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `telefono` int DEFAULT NULL,
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombres` varchar(80) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefono` int(11) DEFAULT NULL,
   `fecha_nacimiento` date NOT NULL,
-  `password` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `pass_recovery` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `domicilio` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `ciudad` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `pais` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `genero` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `foto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `pass` varchar(65) NOT NULL,
+  `pass_recovery` varchar(65) NOT NULL,
+  `domicilio` varchar(100) NOT NULL,
+  `ciudad` varchar(65) NOT NULL,
+  `pais` varchar(65) NOT NULL,
+  `genero` char(1) DEFAULT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `nombres`, `apellido`, `email`, `telefono`, `fecha_nacimiento`, `pass`, `pass_recovery`, `domicilio`, `ciudad`, `pais`, `genero`, `foto`) VALUES
+(1, 'Jose', 'Perez', 'joseperez@gmail.com', 2147483647, '1990-01-01', '1234', '', 'Av. Siempre Viva 123', 'Buenos Aires', 'Argentina', 'H', ''),
+(2, 'Maria', 'Rodriguez', 'mariarodriguez@gmail.com', 654321987, '1980-02-02', '1234', '', 'Av. Aquiles Vaesa 123', 'Caracas', 'Venezuela', 'M', ''),
+(3, 'Pedro', 'Picapiedra', 'pedropicapiedra@gmail.com', 741258963, '1970-03-03', '1234', '', 'Av. Edad de Piedra 123', 'Rio de Janeiro', 'Brasil', 'H', ''),
+(4, 'Ana', 'Sanchez', 'anasanchez@gmail.com', 84321184, '2000-04-04', '1234', '', 'Av. South Park 123', 'Bogota', 'Colombia', 'M', '');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `colores`
+--
+ALTER TABLE `colores`
+  ADD PRIMARY KEY (`id_color`),
+  ADD UNIQUE KEY `color` (`color`);
+
+--
+-- Indices de la tabla `especies`
+--
+ALTER TABLE `especies`
+  ADD PRIMARY KEY (`id_especie`),
+  ADD UNIQUE KEY `especie` (`especie`);
+
+--
+-- Indices de la tabla `fotos_mascotas`
+--
+ALTER TABLE `fotos_mascotas`
+  ADD PRIMARY KEY (`id_foto`),
+  ADD UNIQUE KEY `archivo` (`archivo`);
+
+--
+-- Indices de la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_user` (`id_user`);
+
+--
+-- Indices de la tabla `paises`
+--
+ALTER TABLE `paises`
+  ADD PRIMARY KEY (`id_pais`);
+
+--
+-- Indices de la tabla `razas`
+--
+ALTER TABLE `razas`
+  ADD PRIMARY KEY (`id_raza`),
+  ADD UNIQUE KEY `raza` (`raza`);
+
+--
+-- Indices de la tabla `rel_salud`
+--
+ALTER TABLE `rel_salud`
+  ADD PRIMARY KEY (`id_salud`,`id_mascota`);
+
+--
+-- Indices de la tabla `rel_sociabilidad`
+--
+ALTER TABLE `rel_sociabilidad`
+  ADD PRIMARY KEY (`id_sociabilidad`,`id_mascota`);
+
+--
+-- Indices de la tabla `salud`
+--
+ALTER TABLE `salud`
+  ADD PRIMARY KEY (`id_salud`),
+  ADD UNIQUE KEY `salud` (`salud`);
+
+--
+-- Indices de la tabla `sociabilidad`
+--
+ALTER TABLE `sociabilidad`
+  ADD PRIMARY KEY (`id_sociabilidad`),
+  ADD UNIQUE KEY `sociabilidad` (`sociabilidad`);
+
+--
+-- Indices de la tabla `tamanios`
+--
+ALTER TABLE `tamanios`
+  ADD PRIMARY KEY (`id_tamanio`),
+  ADD UNIQUE KEY `tamanio` (`tamanio`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ciudades`
+--
+ALTER TABLE `ciudades`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `colores`
+--
+ALTER TABLE `colores`
+  MODIFY `id_color` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `especies`
+--
+ALTER TABLE `especies`
+  MODIFY `id_especie` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `fotos_mascotas`
+--
+ALTER TABLE `fotos_mascotas`
+  MODIFY `id_foto` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `mascotas`
+--
+ALTER TABLE `mascotas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `paises`
+--
+ALTER TABLE `paises`
+  MODIFY `id_pais` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `razas`
+--
+ALTER TABLE `razas`
+  MODIFY `id_raza` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `salud`
+--
+ALTER TABLE `salud`
+  MODIFY `id_salud` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sociabilidad`
+--
+ALTER TABLE `sociabilidad`
+  MODIFY `id_sociabilidad` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tamanios`
+--
+ALTER TABLE `tamanios`
+  MODIFY `id_tamanio` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -230,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Filtros para la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

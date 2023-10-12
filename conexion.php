@@ -12,7 +12,6 @@ class Connection
     {
         try {
             self::$conn = new PDO(self::$driver, self::$usuario, self::$contrasena);
-            echo 'Conectado';
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

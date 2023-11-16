@@ -54,8 +54,17 @@ switch ($class_base) {
 
 	case 'user':
 		/**
+		 * url format
+		 * /login
+		 * /logout
+		 * /perfil
+		 * /create
+		 * @param $conn	
+		 * @param $_POST
+		 * @return array
 		//TODO user controller
 		 */
+
 		include $version_base . '/controllers/user.php';
 		switch ($url_parsed[2]) {
 			case 'login':

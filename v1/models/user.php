@@ -10,7 +10,7 @@ function getLoginUser($conn, $user, $pass)
                     fecha_nacimiento,
                     domicilio,
                     ciudades.ciudad,
-                    paises.denominacion,
+                    paises.pais,
                     foto
                 FROM `users` 
                 JOIN 

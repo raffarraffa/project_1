@@ -1,9 +1,13 @@
 RewriteEngine On
-DirectoryIndex api.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-# RewriteRule ^([^\.]+)$ $1.html [NC,L]
-RewriteBase /
+<IfModule mod_headers.c>
+    #Header set Access-Control-Allow-Origi "https://copa-2023-equipo-red-4.github.io,http://localhost:8080/login"
+    #Header set Access-Control-Allow-Origin "http://127.0.0.1:8080"
+    Header set Access-Control-Allow-Origin "https://copapets.onrender.com/"
+    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+    Header set Access-Control-Allow-Credentials true
+</IfModule>
+#DirectoryIndex api.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ api.php [QSA]

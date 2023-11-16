@@ -2,7 +2,11 @@
 <?php
 class Connection
 {
-    private static $usuario = 'root';
+ /*    private static $usuario = '321087_mascota';
+    private static $contrasena = 'mascotitas';
+    private static $driver = "mysql:host=mysql-raffarraffa.alwaysdata.net;dbname=raffarraffa_mascotas";
+    public static $conn = null; */
+	private static $usuario = 'root';
     private static $contrasena = '';
     private static $driver = "mysql:host=localhost;dbname=mascotas";
     public static $conn = null;
